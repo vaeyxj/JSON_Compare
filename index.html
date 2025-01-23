@@ -54,6 +54,7 @@
     <button onclick="compareJson()">Compare JSON</button>
     <div id="diff-output"></div>
 
+    <!-- Load diff2html library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/diff2html/bundles/js/diff2html-ui.min.js"></script>
     <script>
         function formatJson(textareaId) {
@@ -85,7 +86,7 @@
                 const str1 = JSON.stringify(sortedObj1, null, 2);
                 const str2 = JSON.stringify(sortedObj2, null, 2);
 
-                // Generate diff
+                // Generate diff using jsondiffpatch
                 const diff = Diff2Html.getPrettyHtml(
                     Diff2Html.getDiff(str1, str2, { inputFormat: 'json' }),
                     {
