@@ -32,19 +32,43 @@
             font-size: 16px;
             cursor: pointer;
         }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
     <h1>JSON Diff Viewer</h1>
     <div class="container">
-        <textarea id="json1" placeholder="Paste JSON 1 here..."></textarea>
-        <textarea id="json2" placeholder="Paste JSON 2 here..."></textarea>
+        <div>
+            <textarea id="json1" placeholder="Paste JSON 1 here..." oninput="formatJson('json1')"></textarea>
+            <div id="error1" class="error"></div>
+        </div>
+        <div>
+            <textarea id="json2" placeholder="Paste JSON 2 here..." oninput="formatJson('json2')"></textarea>
+            <div id="error2" class="error"></div>
+        </div>
     </div>
     <button onclick="compareJson()">Compare JSON</button>
     <div id="diff-output"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/diff2html/bundles/js/diff2html-ui.min.js"></script>
     <script>
+        function formatJson(textareaId) {
+            const textarea = document.getElementById(textareaId);
+            const errorDiv = document.getElementById(`error${textareaId.slice(-1)}`);
+            try {
+                const json = JSON.parse(textarea.value);
+                const formattedJson = JSON.stringify(json, null, 2);
+                textarea.value = formattedJson;
+                errorDiv.textContent = '';
+            } catch (error) {
+                errorDiv.textContent = `Invalid JSON: ${error.message}`;
+            }
+        }
+
         function compareJson() {
             const json1 = document.getElementById('json1').value;
             const json2 = document.getElementById('json2').value;
