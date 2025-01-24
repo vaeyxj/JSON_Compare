@@ -287,23 +287,43 @@ function JsonDiffViewer() {
         </ol>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-        <div>
-          <h4>原始JSON</h4>
+      <div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: '1fr 1fr', 
+        gap: '40px',  // 增加间距
+        padding: '20px',  // 增加内边距
+        backgroundColor: '#f8f9fa',  // 添加背景色
+        borderRadius: '8px',  // 圆角
+        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'  // 添加阴影效果
+      }}>
+        <div style={{ 
+          padding: '16px', 
+          backgroundColor: '#fff', 
+          borderRadius: '4px',
+          boxShadow: '0 1px 2px rgba(0,0,0,0.1)',
+        //   width: '100%'  // 减小宽度
+        }}>
+          <h4 style={{ marginBottom: '12px' }}>原始JSON</h4>
           <textarea
             placeholder="在此粘贴或输入JSON..."
-            style={validationError.json1 ? errorTextareaStyle : textareaStyle}
+            style={{...validationError.json1 ? errorTextareaStyle : textareaStyle, width: '95%'}}  // 设置100%宽度
             value={json1}
             onChange={handleJsonChange(setJson1, 'json1')}
           />
           <JSONPreview jsonString={json1} />
         </div>
 
-        <div>
-          <h4>新JSON</h4>
+        <div style={{ 
+          padding: '16px', 
+          backgroundColor: '#fff', 
+          borderRadius: '4px',
+          boxShadow: '0 1px 2px rgba(0,0,0,0.1)',
+        //   width: '90%'  // 减小宽度
+        }}>
+          <h4 style={{ marginBottom: '12px' }}>新JSON</h4>
           <textarea
             placeholder="在此粘贴或输入JSON..."
-            style={validationError.json2 ? errorTextareaStyle : textareaStyle}
+            style={{...validationError.json2 ? errorTextareaStyle : textareaStyle, width: '95%'}}  // 设置100%宽度
             value={json2}
             onChange={handleJsonChange(setJson2, 'json2')}
           />
